@@ -1,4 +1,4 @@
-const parallel = require('run-parallel')
+import parallel from 'run-parallel'
 
 function makeBuffer (num) {
   const buf = Buffer.alloc(10)
@@ -6,7 +6,7 @@ function makeBuffer (num) {
   return buf
 }
 
-module.exports = function (test, Store) {
+export function ChunkTest (test, Store) {
   test('basic put, then get', function (t) {
     const store = new Store(10)
     store.put(0, Buffer.from('0123456789'), function (err) {
@@ -16,7 +16,6 @@ module.exports = function (test, Store) {
         t.deepEqual(chunk, Buffer.from('0123456789'))
         store.destroy(function (err) {
           t.error(err)
-          t.end()
         })
       })
     })
@@ -28,7 +27,6 @@ module.exports = function (test, Store) {
       t.ok(err instanceof Error)
       store.destroy(function (err) {
         t.error(err)
-        t.end()
       })
     })
   })
@@ -69,7 +67,6 @@ module.exports = function (test, Store) {
         t.error(err)
         store.destroy(function (err) {
           t.error(err)
-          t.end()
         })
       })
     })
@@ -100,7 +97,6 @@ module.exports = function (test, Store) {
       t.error(err)
       store.destroy(function (err) {
         t.error(err)
-        t.end()
       })
     })
   })
@@ -114,7 +110,6 @@ module.exports = function (test, Store) {
         t.deepEqual(chunk, Buffer.from('234'))
         store.destroy(function (err) {
           t.error(err)
-          t.end()
         })
       })
     })
@@ -129,7 +124,6 @@ module.exports = function (test, Store) {
         t.deepEqual(chunk, Buffer.from('0123456789'))
         store.destroy(function (err) {
           t.error(err)
-          t.end()
         })
       })
     })
@@ -144,7 +138,6 @@ module.exports = function (test, Store) {
         t.deepEqual(chunk, Buffer.from('0123456789'))
         store.destroy(function (err) {
           t.error(err)
-          t.end()
         })
       })
     })
@@ -159,7 +152,6 @@ module.exports = function (test, Store) {
         t.deepEqual(chunk, Buffer.from('23456789'))
         store.destroy(function (err) {
           t.error(err)
-          t.end()
         })
       })
     })
@@ -174,7 +166,6 @@ module.exports = function (test, Store) {
         t.deepEqual(chunk, Buffer.from('01234'))
         store.destroy(function (err) {
           t.error(err)
-          t.end()
         })
       })
     })
@@ -189,7 +180,6 @@ module.exports = function (test, Store) {
         t.deepEqual(chunk, Buffer.from('0123456789'))
         store.destroy(function (err) {
           t.error(err)
-          t.end()
         })
       })
     })
@@ -200,7 +190,6 @@ module.exports = function (test, Store) {
     store.put(0, Buffer.from('01234'))
     store.destroy(function (err) {
       t.error(err)
-      t.end()
     })
   })
 
@@ -209,7 +198,6 @@ module.exports = function (test, Store) {
     store.put(0, Buffer.from('0123456789'))
     store.destroy(function (err) {
       t.error(err)
-      t.end()
     })
   })
 
@@ -218,7 +206,6 @@ module.exports = function (test, Store) {
     t.equal(store.chunkLength, 10)
     store.destroy(function (err) {
       t.error(err)
-      t.end()
     })
   })
 
@@ -228,7 +215,6 @@ module.exports = function (test, Store) {
       t.ok(err instanceof Error)
       store.destroy(function (err) {
         t.error(err)
-        t.end()
       })
     })
   })
@@ -237,7 +223,6 @@ module.exports = function (test, Store) {
     const store = new Store(10)
     store.close(function (err) {
       t.error(err)
-      t.end()
     })
   })
 
@@ -246,7 +231,8 @@ module.exports = function (test, Store) {
     store.put(0, Buffer.from('0123456789'))
     store.close(function (err) {
       t.error(err)
-      t.end()
     })
   })
 }
+
+export default ChunkTest
