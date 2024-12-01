@@ -14,7 +14,7 @@
 ## Install
 
 ```
-npm install abstract-chunk-store
+npm install -D @substrate-system/abstract-chunk-store
 ```
 
 ## Some modules that use this
