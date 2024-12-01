@@ -8,6 +8,9 @@
     ".": "./tests/index.js",
     "./tests": "./tests/index.js"
   },
+  "scripts": {
+    "postversion": "git push --follow-tags && npm publish"
+  },
   "dependencies": {
     "run-parallel": "^1.1.2"
   },
